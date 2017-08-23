@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			body,div,ul{
+				margin:0;
+				padding:0;
+				}
+			ul,li{
+				list-style: none;
+			}
+			a{text-decoration: none;}
+			#link{
+				float:left;
+			}
+			#ul_list{
+				position:relative;
+				float:left;
+				height:400px;
+			}
+			#link a{
+				height:50px;
+				line-height:50px;
+				text-align: center;
+				width:100px;
+				font-size:16px;
+				display:block;
+				background:aqua;
+			}
+			#link a:hover{background:red}
+			
+			ul{
+				position:absolute;
+				top:0;
+				left:0;
+				height:250px;
+				width:0px;
+				background:red;
+				overflow: hidden;
+			}
+			ul li{
+				width:200px;
+				height:50px;
+				line-height:50px;
+				padding-left:40px;
+				}
+		</style>
+		<script src="js/common.js"></script>
+		<script>
+			window.onload = function(){
+				var oDiv = document.getElementById("link");
+				var oUl = document.getElementById("ul_list");
+				var aLink = oDiv.getElementsByTagName("a");
+				var aUl = oUl.getElementsByTagName("ul");
+				for(var i=0;i < aLink.length; i++){
+					aLink[i].index = i;
+					
+					aLink[i].onmouseover = function(){
+						
+						startMove(aUl[this.index],{"width":300});
+						
+					}
+					aLink[i].onmouseout = function(){
+						
+						startMove(aUl[this.index],{"width":0});
+						
+					}
+					aUl[i].onmouseover = function(){
+						
+						startMove(this,{"width":300});
+						
+					}
+					aUl[i].onmouseout = function(){
+						
+						startMove(this,{"width":0});
+						
+					}	
+					
+				}
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div id="link"><a href="javascript:;">菜单一</a><a href="javascript:;">菜单二</a><a href="javascript:;">菜单三</a><a href="javascript:;">菜单四</a><a href="javascript:;">菜单五</a></div>
+		<div id="ul_list">
+			<ul>
+				<li><a href="#">菜单一----------子菜单一</a></li>
+				<li><a href="#">菜单一----------子菜单二</a></li>
+				<li><a href="#">菜单一----------子菜单三</a></li>
+				<li><a href="#">菜单一----------子菜单四</a></li>
+				<li><a href="#">菜单一----------子菜单五</a></li>
+			</ul>
+			<ul>
+				<li><a href="#">菜单二----------子菜单一</a></li>
+				<li><a href="#">菜单二----------子菜单二</a></li>
+				<li><a href="#">菜单二----------子菜单三</a></li>
+				<li><a href="#">菜单二----------子菜单四</a></li>
+				<li><a href="#">菜单二----------子菜单五</a></li>
+			</ul>
+			<ul>
+				<li><a href="#">菜单三----------子菜单一</a></li>
+				<li><a href="#">菜单三----------子菜单二</a></li>
+				<li><a href="#">菜单三----------子菜单三</a></li>
+				<li><a href="#">菜单三----------子菜单四</a></li>
+				<li><a href="#">菜单三----------子菜单五</a></li>
+			</ul>
+			<ul>
+				<li><a href="#">菜单四----------子菜单一</a></li>
+				<li><a href="#">菜单四----------子菜单二</a></li>
+				<li><a href="#">菜单四----------子菜单三</a></li>
+				<li><a href="#">菜单四----------子菜单四</a></li>
+				<li><a href="#">菜单四----------子菜单五</a></li>
+			</ul>
+			<ul>
+				<li><a href="#">菜单五-----子菜单一</a></li>
+				<li><a href="#">菜单五-----子菜单二</a></li>
+				<li><a href="#">菜单五-----子菜单三</a></li>
+				<li><a href="#">菜单五-----子菜单四</a></li>
+				<li><a href="#">菜单五-----子菜单五</a></li>
+			</ul>
+		</div>
+	</body>
+</html>

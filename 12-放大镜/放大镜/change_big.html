@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>放大镜</title>
+
+<style type="text/css">
+div{padding:0;margin:0;}
+#div1{position:relative;height:200px;width:200px;}
+#div1 .small_pic{height:200px;width:200px;position:relative;background:#eee;}
+#div1 .float_layer{border:1px solid rgb(153,153,153);display:none;height:50px;width:50px;position:absolute;filter:alpha(opacity=30);opacity:0.3;background:#FFF;}
+#div1 .big_pic{height:250px;width:250px;position:absolute;top:0px;left:200px;overflow:hidden;display:none;}
+#div1 .big_pic img{position:absolute;left:0px;top:0px;}
+</style>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById("div1");
+	var oSmall=document.getElementsByClassName("small_pic")[0];
+	var oFloat=document.getElementsByClassName("float_layer")[0];
+	var oBig=document.getElementsByClassName("big_pic")[0];
+	var oImg=document.getElementsByTagName("img")[1];
+	
+	oSmall.onmouseover=function(){
+		oBig.style.display="block";	
+		oFloat.style.display="block";
+	}
+	oSmall.onmouseout=function(){
+		oBig.style.display="none";	
+		oFloat.style.display="none";
+	}
+	oSmall.onmousemove=function(e){
+		var evt=e||window.event;
+		
+		var x=evt.clientX-oDiv.offsetLeft-oFloat.offsetWidth/2;
+		var y=evt.clientY-oDiv.offsetTop-oFloat.offsetHeight/2;
+		if(x<0){
+			x=0;	
+		}else if(x>oSmall.offsetWidth-oFloat.offsetWidth){
+			x=oSmall.offsetWidth-oFloat.offsetWidth;	
+		}
+		if(y<0){
+			y=0;	
+		}else if(y>oSmall.offsetHeight-oFloat.offsetHeight){
+			y=oSmall.offsetHeight-oFloat.offsetHeight;	
+		}		
+		oFloat.style.left=x+"px";
+		oFloat.style.top=y+"px";
+		
+		var percentX=x/(oSmall.offsetWidth-oFloat.offsetWidth);
+		var percentY=y/(oSmall.offsetHeight-oFloat.offsetHeight);
+		
+		oImg.style.left=-percentX*(oImg.offsetWidth-oBig.offsetWidth)+"px";
+		oImg.style.top=-percentY*(oImg.offsetHeight-oBig.offsetHeight)+"px";
+		console.log(oImg.style.left);
+		
+
+	}
+	
+	
+	
+}
+
+
+
+
+</script>
+</head>
+
+
+<body>
+<div id="div1">
+	<div class="small_pic">
+    	<span class="float_layer"></span>
+        <img src="images/small.jpg" style="width:200px;height:200px;"/>
+    </div>
+    <div class="big_pic">
+    	<img src="images/big.jpg"/>
+    </div>
+</div>
+
+
+</body>
+</html>

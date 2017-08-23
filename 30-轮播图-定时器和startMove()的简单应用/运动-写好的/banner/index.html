@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>轮播图</title>
+		<link href="css.css" rel="stylesheet" type="text/css">
+		<script src="js/move.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#outer{
+				width:200px;
+				height: 200px;
+				background: red;
+				position: relative;
+			}
+			#inner{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width:100px;
+				height:100px;
+				background: green;
+				z-index: 0;
+			}
+			#inner1{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width:100px;
+				height: 100px;
+				background: blue;
+				z-index: 0;
+			}
+			#inner2{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width:100px;
+				height: 100px;
+				background: yellow;
+				z-index: 1;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="banner-box">
+			<ul id="banner">
+				<li><img src="img/1.jpg"></li>
+				<li><img src="img/2.jpg"></li>
+				<li><img src="img/3.jpg"></li>
+				<li><img src="img/4.jpg"></li>
+			</ul>
+			<ul id="nav">
+				<li class="cur">1</li><li>2</li><li>3</li><li>4</li>
+			</ul>
+			<div id="btn">
+				<div class="prev">&lt;</div>
+				<div class="next">&gt;</div>
+			</div>
+			
+		</div>
+		<div id="outer">
+			<div id="inner"> </div>
+			<div id="inner1"></div>
+			<div id="inner2"></div>
+		</div>
+		<script>
+			var outer = document.getElementById("outer");
+			var inner = document.getElementById("inner");
+//			outer.onmouseover = function(){
+//				console.log("a");
+//			}
+//			inner.onmouseover = function(){
+//				console.log("a2");
+//			}
+//			outer.onmouseout = function(){
+//				console.log("a1");
+//			}
+//			outer.onmouseenter = function(){
+//				console.log("b");
+//			}
+//			inner.onmouseenter = function(){
+//				console.log("b2");
+//			}
+//			outer.onmouseleave = function(){
+//				console.log("b1");
+//			}
+		</script>
+		<script type="text/javascript">
+			var oBanner = document.getElementById("banner");
+			var aBannerLi = oBanner.getElementsByTagName("li");
+			var oNav = document.getElementById("nav");
+			var aNavLi = oNav.getElementsByTagName("li");
+			var oBtn = document.getElementById("btn");
+			var oPrev = oBtn.getElementsByTagName("div")[0];
+			var oNext = oBtn.getElementsByTagName("div")[1];
+			var oBannerBox = document.getElementById("banner-box");
+			var i = 0;
+			//var bOff = true;
+			//z-index -- zIndex
+			aBannerLi[0].style.opacity = 1;
+			aBannerLi[0].style.zIndex = 1;
+			var timer = setInterval(move,3000);//filter 
+			for(var n = 0; n < aBannerLi.length; n++){
+				aBannerLi[n].index = n;
+				aBannerLi[n].onmouseover = function(){
+					console.log(this.index);
+				}
+			}
+			function move(){
+				//bOff = false;
+				clearInterval(timer);
+				i++;
+				for(var j = 0; j < aBannerLi.length; j++){
+					aBannerLi[j].style.zIndex = 0;
+					startMove(aBannerLi[j],{"opacity":0});
+				}
+				for(var k = 0; k < aNavLi.length; k++){
+					aNavLi[k].className = "";
+				}
+
+				if(i>=aBannerLi.length){
+					i = 0;
+				}
+				
+				aNavLi[i].className = "cur";
+				aBannerLi[i].style.zIndex = 1;
+				startMove(aBannerLi[i],{"opacity":100},clear);
+			}
+			function clear(){
+				//bOff = true;
+				timer = setInterval(move,3000);
+			}
+			
+			for(var m = 0; m < aNavLi.length; m++){
+				aNavLi[m].index = m;
+				aNavLi[m].onclick = function(){
+					i = this.index - 1; //move中有++
+					move();
+				}
+			}
+			
+			oPrev.onclick = function(){
+				if(i==0){
+					i=aBannerLi.length-2;
+				}else{
+					i = i - 2;
+				}
+				move();
+			}
+			oNext.onclick = function(){
+				move();
+			}
+			oBannerBox.onmouseenter = function(){
+				clearInterval(timer);
+			}
+			oBannerBox.onmouseleave = function(){
+				//move();
+				timer = setInterval(move,1000);
+			}
+			
+
+			
+		</script>
+	</body>
+</html>

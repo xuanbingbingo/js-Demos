@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DIY select</title>
+<style>
+body,input,ul,li{margin:0;padding:0}
+ul{height:90px;width:80px;border:1px solid rgb(153,153,153);border-top:none;}
+li{list-style:none;padding-left:13px;}
+
+#input{width:60px;height:20px;float:left;border:none;text-align:center;font-size:16px;outline:none;}
+#button{width:20px;height:20px;float:left;border:none;background:none;outline:none}
+form{height:20px;width:80px;border:1px solid rgb(102,102,102);}
+</style>
+</head>
+
+<body>
+<form>
+	<input type="text" id="input" value="北京">
+	<input type="button" id="button" value="v">
+</form>
+<ul>
+	<li>北京</li>
+    <li>广州</li>
+    <li>深圳</li>
+    <li>杭州</li>
+</ul>
+<script>
+var oUl=document.getElementsByTagName("ul")[0];
+oUl.style.display="none";
+var oTx=document.getElementById("input");
+var oBt=document.getElementById("button");
+oBt.onclick=function(){
+	if(oUl.style.display=="none"){
+		oUl.style.display="block";
+	}else{
+		oUl.style.display="none";
+	}		
+}
+oUl.onmouseover=function(e){
+	var evt=e||event;
+	var target=evt.target||evt.srcElement;
+	
+	if(target.nodeName.toLowerCase()=="li"){
+		console.log(target);
+		target.style.background="red";
+	}	
+}
+oUl.onmouseout=function(e){
+	var evt=e||event;
+	var target=evt.target||evt.srcElement;
+	
+	if(target.nodeName.toLowerCase()=="li"){
+		console.log(target);
+		target.style.background="";
+	}	
+}
+oUl.onclick=function(e){
+	var evt=e||event;
+	var target=evt.target||evt.srcElement;
+	
+	if(target.nodeName.toLowerCase()=="li"){
+		oTx.value=target.innerText;
+		oUl.style.display="none";
+	}	
+}
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+		body{background:url(img/bg.jpg)}
+		img{
+			position:absolute;
+			left:0;
+			top:0;
+			width:18px;
+		}
+	</style>
+	<script src="js/common.js"></script>
+	<script>
+	
+		function Fireworm(){
+			this.element = document.createElement("img");
+			this.element.src = "img/1.jpg";
+		}
+		Fireworm.prototype.show = function(){
+			this.element.style.left = this.posX + "px";
+			this.element.style.top = this.posY + "px";
+			document.body.appendChild(this.element);
+		}
+		Fireworm.prototype.newPoint = function(){
+			this.posX = Math.floor(Math.random()*document.documentElement.clientWidth)  - 30;
+			this.posY = Math.floor(Math.random()*document.documentElement.clientHeight)  - 30;
+		}
+		Fireworm.prototype.fly = function(){
+			var _this = this;
+			this.newPoint();
+			startMove(this.element,{"left":this.posX,"top":this.posY},function(){
+				_this.fly();
+			})
+		}
+		window.onload = function(){
+			for(var i = 0;i < 30;i++){
+				var fire = new Fireworm();
+				fire.fly();
+				fire.show();
+			}	
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

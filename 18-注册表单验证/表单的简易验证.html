@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>注册表单验证</title>
+<style type="text/css">
+fieldset{border:0;border-top:2px solid #c9dca6;}
+.teshu{margin-left:120px;}
+textarea{overflow:scroll;}
+.move1{margin-left:48px;}
+.move2{margin-left:64px;}
+.tab{width:200px;height:200px;border-spacing:10px;table-layout:fixed;}
+.tab td{background:rgb(255,0,0);}
+label{font-size:11px;}
+</style>
+<script>
+function check(){
+	var str=document.getElementsByTagName("input")[0].value;
+	var a=str.charCodeAt(0);
+	var div_obj=document.getElementsByTagName("div")[0];
+	if(str.length>=6&&str.length<=20){
+		
+		if((a>=65&&a<=90)||(a>=97&&a<=122)||a==95){
+			var n="";
+			for(var i=0;i<str.length;i++){
+				n=str.charCodeAt(i);	
+				if((n>=65&&n<=90)||(n>=97&&n<=122)||(n==95)||(n>=48&&n<=57)){
+					
+						if(document.getElementsByTagName("input")[1].value!=document.getElementsByTagName("input")[2].value)
+						{	
+							
+							alert("您输入的两次密码不一样，请重新输入！");
+							break;
+						
+						}
+						else if(document.getElementsByTagName("input")[1].value==0)
+						{
+							alert('密码不能为空！');
+							break;	
+						}
+					
+				}else{
+						
+					alert("您输入的用户名有错误！");
+					
+					break;
+				}
+			
+			}			
+			
+		}else
+		{
+			alert("您的用户名的首字母必须符合规则！");	
+		}
+			
+	}else
+	{
+		alert("用户名中请输入6-20位字符");
+	}	
+}
+
+window.onload=function(){
+	
+	document.getElementsByClassName("teshu")[0].onclick=check;
+	
+}
+
+</script>
+</head>
+
+<body>
+	<form name="" method="get" action="">  
+    <fieldset>
+    <legend>注册页面</legend>
+    	用户名*<input type="text" class="move1" value=""/><label>用户名必须只能包含字母、数字、下划线，且首字母不能为数字！</label><br/>
+        <br/>
+        密码*<input type="password" class="move2" placeholder=""/><br/><br/>
+        
+        再次输入密码*<input type="password" placeholder=""/><label>两次输入密码必须一致，且不为空！</label><br/>
+        <br/>
+         <input class="teshu" type="submit" value="提交个人信息"/>   
+    </fieldset>
+    </form>
+
+<script>
+
+var str="a,a,b,c,c,d";
+var str1=str.split(",").join('');
+var arr2=new Array();
+//console.log(arr);	
+for(var i=0;i<str1.length;i++)
+{
+	if(arr2.indexOf(str1[i])==-1)
+	{
+			arr2.push(str1[i]);
+	}	
+	
+}
+console.log(arr2);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>javascript语句</title>
+<style>
+body,ul,li{
+padding:0;
+margin:0;
+}
+li{
+list-style:none; 
+margin:10px 0;
+}
+input{
+vertical-align:top;
+margin-right:5px;
+}
+.clearfix:after{
+display:block;
+content:"";
+height:0;
+clear:both;
+visibility:hidden;
+}
+div{
+float:left;
+margin:40px 10px 0;
+}
+div:nth-child(2){
+margin-top:0;
+}
+</style>
+
+</head>
+<body>
+<div class="clearfix">
+<div id="operater1">
+<input type="text">
+</div>
+<div id="operate">
+<ul>
+<li><label><input type="radio" name="radio">&plus;</label></li>
+<li><label><input type="radio" name="radio">&minus;</label></li>
+<li><label><input type="radio" name="radio">&times;</label></li>
+<li><label><input type="radio" name="radio">&divide;</label></li>
+</ul>
+</div>
+<div id="operater2">
+<input type="text">
+</div>
+<div>=</div>
+<div id="value">
+<input type="text">
+</div>
+<div id="btn">
+<input type="button" value="求值" onclick="doOpt()">
+</div>
+</div>
+<input type="text" id="grade"> <input type="button" value="判断成绩" onclick="grade()">
+<script>
+//简易计算器
+	function doOpt(){
+	
+		var oDiv1 = document.getElementById("operater1");
+		var sValue1 = oDiv1.getElementsByTagName("input")[0].value;
+		var oDiv2 = document.getElementById("operater2");
+		var sValue2 = oDiv2.getElementsByTagName("input")[0].value;
+
+		var num1 = parseFloat(sValue1);
+		var num2 = parseFloat(sValue2);
+
+		var opt = document.getElementById("operate");
+		var aInput = opt.getElementsByTagName("input");
+
+		var oDiv = document.getElementById("value");
+		var oInput = oDiv.getElementsByTagName("input")[0];
+		
+		if(aInput[0].checked){
+			oInput.value = num1 + num2;
+		}else if(aInput[1].checked){
+				oInput.value = num1 - num2;
+			}else if(aInput[2].checked){
+					oInput.value = num1 * num2;
+				}else{
+						oInput.value = num1 / num2;
+					}
+
+	}
+	function grade(){
+		var grade1 = "优秀", grade2 = "合格", grade3 = "不及格";
+		var grade = parseFloat(document.getElementById("grade").value);
+		
+		if(grade >= 80){
+			alert("<p>该生的成绩为："+grade1+"</p>");
+		}else if(grade >= 60 && grade < 80){
+			document.write("<p>该生的成绩为："+grade2+"</p>");
+		}else if(grade < 60){
+			document.write("<p>该生的成绩为："+grade3+"</p>");
+		}
+	}
+	
+
+</script>
+</body>
+</html>

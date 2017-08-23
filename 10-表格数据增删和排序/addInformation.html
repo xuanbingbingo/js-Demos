@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>添加表格</title>
+<style>
+
+table{
+	table-layout:fixed;
+	margin-top:20px;
+	border:1px solid rgb(255,0,0);
+	border-collapse:collapse;
+	border-spacing:0;
+	width:600px;
+	}
+tbody{
+	min-height:40px;
+	height:auto!important;
+	height:40px;
+	border:1px solid rgb(0,0,255);
+	}
+table td,th{text-align:center;border:1px solid #000000;}
+th{background:rgb(204,204,204);font-weight:bold;}
+button{margin-left:5px;}
+
+</style>
+<script>
+
+
+window.onload=function(){
+		var tbody=document.getElementsByTagName("tbody")[0];
+		document.getElementsByTagName("button")[0].onclick=function(){
+		
+		var oInput=document.getElementsByTagName("input");
+		var arr=[];
+		//将输入框中的内容放进数组中
+		for(var i=0;i<3;i++){
+			
+			arr.push(oInput[i].value);
+			
+		}
+		//console.log(arr);
+		//每次点击创建一个tr标签;
+		var tr=document.createElement("tr");
+		//每次点击创建四个td标签，并依次添加到tr标签中
+		for(var i=0;i<4;i++)
+		{
+			var td=document.createElement("td");
+			tr.appendChild(td);
+			td.innerText=arr[i];
+		
+		}
+		//判断输入框是否为空，若为空则提示
+		for(var i=0;i<3;i++)
+		{	
+			if (arr[i]==0){
+				alert("内容不能为空");return;
+			}	
+			
+		}
+		//将tr标签放入tbody中，每次点击操作都使得新创建的tr排在头部位置;
+		tbody.insertBefore(tr,tbody.childNodes[0]);
+		
+		tr.lastElementChild.innerHTML="<a href='#'>删除</a>";
+		
+		var aLink=document.getElementsByTagName("a");
+		
+		//执行完一次点击事件后清空输入框
+		for(var i=0;i<3;i++){
+			
+			oInput[i].value="";
+			
+		}	
+		//点击删除按钮执行删除一行的操作
+		for(var i=0;i<aLink.length;i++){
+			
+			aLink[i].onclick=function(){
+				
+				this.parentNode.parentNode.style.display="none";	
+				
+			}
+			
+				
+		}
+		
+		
+		document.getElementsByTagName("button")[1].onclick=function(){
+		//点击按照ID进行tbody中行的重新排序
+		
+			var aTab=document.getElementsByTagName("table")[0];
+			
+			var aTr=document.getElementsByTagName("tr");
+			
+			//console.log(aTr);
+			
+			var ar=[];
+			
+			for(var i=1;i<aTr.length;i++){
+				
+			ar.push(aTr[i]);
+			
+			}
+			//console.log(ar);
+			
+			ar.sort(compare);
+			
+			//console.log(ar);
+			for(var i=1;i<aTr.length;i++){
+				
+				aTr[1].parentNode.removeChild(aTr[1]);	
+				
+			}
+			for(var i=0;i<ar.length;i++){
+				
+				aTab.appendChild(ar[i]);
+					
+			}	
+		function compare(a,b){
+			
+			return parseInt(a.children[0].innerHTML)-parseInt(b.children[0].innerHTML);	
+			
+		}	
+		
+		/*
+		var ar=[];
+		
+		for(var i = 0; i < aTr.length; i++){
+		
+			ar.push(aTr[i]);
+		
+		}
+		
+		console.log(ar);
+		
+		
+		ar.sort(function(a,b){
+		
+			//console.log(a.children[2].innerHTML);
+		
+			return a.children[0].innerHTML - b.children[0].innerHTML;
+		
+		});
+		
+		console.log(ar);
+		//console.log(aTr);
+		
+		*/
+		
+	}
+				
+	}		
+	
+}
+
+
+</script>
+</head>
+
+<body>
+ID<input type="text">姓名<input type="text">电话<input type="text"><button>保存</button><button>排序</button>
+<table>
+<thead><tr><th>ID</td><th>姓名</th><th>电话</th><th>操作</th></tr></thead>
+<tbody></tbody>
+
+
+</table>
+  
+</body>
+</html>

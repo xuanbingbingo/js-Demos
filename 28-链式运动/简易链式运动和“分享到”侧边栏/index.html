@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>move动作</title>
+		<script>
+		//封装获取样式 函数
+		function getStyle(obj,sName){
+			
+			if(obj.currentStyle){
+				
+				return obj.currentStyle[sName];	
+				
+			}else{
+				
+				return getComputedStyle(obj,false)[sName];
+				
+			}
+				
+		}
+		window.onload = function(){
+			
+			var oDiv = document.getElementById("div1");
+			
+			var oBtn = document.getElementById("btn");
+			
+			var oLine = document.getElementById("line1");
+			
+			var oDivAll = document.getElementById("div");
+			
+			// 链式运动
+			
+			oBtn.onclick = function(){
+				 startMove(oDiv,{"width":500},function(){
+				 	startMove(oDiv,{"opacity":100},function(){
+				 		startMove(oDiv,{"height":500})
+				 	});
+				 }); 
+			}
+			// 分享到：
+			oDivAll.onmouseover= function(){
+				startMove(oDivAll,{"left":"0"})
+			}
+			oDivAll.onmouseout = function(){
+				startMove(oDivAll,{"left":"-100"})
+			}
+			
+			/*距离上的移动（越来越慢的移动）
+			 * 
+			 function startMove(iTarget){
+			 	
+			 	oDiv.timer = null;
+			 	
+			 	clearInterval(oDiv.timer);
+			 	
+				oDiv.timer=setInterval(function(){
+					
+					var iSpeed = (iTarget - oDiv.offsetLeft)/10;
+					
+					if(iSpeed >= 0){
+						
+						iSpeed = Math.ceil((iTarget - oDiv.offsetLeft)/10);
+						
+					}else{
+						
+						iSpeed = Math.floor((iTarget - oDiv.offsetLeft)/10);
+						
+					}
+					
+					if(oDiv.offsetLeft == iTarget){
+						
+						clearInterval(oDiv.timer);
+						
+					}else{
+						
+						oDiv.style.left = oDiv.offsetLeft + iSpeed + "px";
+						
+					}	
+					
+				},30)
+				
+			}
+			*/
+			
+			/*透明度上的渐变（越来越慢的渐变）
+			function startMove(iTarget){
+				oDiv.timer = null;
+			 	clearInterval(oDiv.timer);
+				oDiv.timer=setInterval(function(){
+					var iSpeed = (iTarget - oDiv.style.opacity*100)/10;
+					if(iSpeed>=0){
+						iSpeed = Math.ceil((iTarget - oDiv.style.opacity*100)/10);
+					}else{
+						iSpeed = Math.floor((iTarget - oDiv.style.opacity*100)/10);
+					}
+					if(oDiv.opacity == iTarget){
+						clearInterval(timer);
+					}else{
+						var iCur = getStyle(oDiv,"opacity")*100;
+						oDiv.style.opacity = (iCur+iSpeed)/100;
+						oDiv.style.filter = 'alpha(opacity = '+iCur+iSpeed+')';
+					}
+				},30)
+			}
+			*/
+			
+			
+			/*
+			function startMove(obj,attr,iTarget){
+			 	clearInterval(oDiv.timer);
+				obj.timer=setInterval(function(){
+					if(attr=="opacity"){
+						var iCur = getStyle(obj,"opacity")*100;
+					}else{
+						var iCur = parseInt(getStyle(obj,attr))
+					}
+					var iSpeed = (iTarget-iCur)/10;
+					iSpeed > 0 ? iSpeed = Math.ceil(iSpeed) : iSpeed = Math.floor(iSpeed);
+					if(iCur==iTarget){
+						clearInterval(obj.timer);
+					}else{
+						if(attr == "opacity"){
+							obj.style.opacity = (iCur + iSpeed)/100;
+							obj.style.filter = "alpha(opacity="+iCur+iSpeed+")";
+						}else{
+							obj.style[attr]=iCur + iSpeed + "px";
+						}
+					}
+				},30)
+			}
+			*/
+			function startMove(obj,json,fn){
+			 	clearInterval(obj.timer);
+				obj.timer=setInterval(function(){
+					var bTag = true;
+					for(var attr in json){
+						if(attr=="opacity"){
+							var iCur = getStyle(obj,"opacity")*100;
+						}else{
+							var iCur = parseInt(getStyle(obj,attr))
+						}
+						
+						var iSpeed = (json[attr]-iCur)/8;
+						
+						iSpeed > 0 ? iSpeed = Math.ceil(iSpeed) : iSpeed = Math.floor(iSpeed);
+						if(attr == "opacity"){
+							obj.style.opacity = (iCur + iSpeed)/100;
+							obj.style.filter = "alpha(opacity="+(iCur+iSpeed)+")";
+						}else{
+							obj.style[attr]=iCur + iSpeed + "px";
+						}
+						if(iCur != json[attr]){
+							bTag = false;
+							console.log(bTag);
+						}						
+					}
+					console.log(bTag);
+					if(bTag){
+						clearInterval(obj.timer);
+						if(fn){
+							fn();
+						}
+					}
+				},30)
+			}
+			
+		}
+		
+
+		</script>
+		<style>
+			div,body{padding:0;margin:0}
+			#div{
+				width:120px;
+				height:100px;
+				position: absolute;
+				top:50px;
+				left:-100px;
+				}
+			#div1{
+				height:100px;
+				width:100px;
+				background:blue;
+				opacity: 0.2;
+				filter:alpha(opacity = 20);
+				float:left;
+			}
+			#share{
+				height:80px;
+				width:20px;
+				background:blue;
+				margin-top:10px;
+				float:left;
+				}
+			#line1{
+				width:1px;
+				height:300px;
+				background:black;
+				position: absolute;
+				left:500px;
+				top:0;
+			}
+			#line2{
+				width:1px;
+				height:300px;
+				background:black;
+				position: absolute;
+				left:200px;
+				top:0;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" id="btn" value="行动起来">
+		<div id="div">
+			<div id="div1"></div>
+			<div id="share">分享到</div>
+		</div>
+		<div id="line1"></div>
+		<div id="line2"></div>
+	</body>
+</html>

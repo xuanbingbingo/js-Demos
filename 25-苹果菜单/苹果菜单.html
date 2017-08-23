@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+#wrapper{position:absolute;width:100%;text-align:center;bottom:0;}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+		var aImg=document.getElementsByTagName('img');
+       	var oDiv=document.getElementById('wrapper');
+		var arr=[];
+		for(var i=0;i<aImg.length;i++){
+			arr.push(aImg[i].width);
+			aImg[i].width=aImg[i].width/2;
+		}
+  	 	document.onmousemove=function(ev){
+			var oEvent=ev||event;
+			for(var i=0;i<aImg.length;i++){
+				var a=aImg[i].offsetLeft+aImg[i].offsetWidth/2-oEvent.clientX;
+				 // console.log(aImg[i].offsetLeft,aImg[i].offsetWidth/2,oEvent.clientX)
+				var b=aImg[i].offsetTop+oDiv.offsetTop+aImg[i].offsetHeight/2-oEvent.clientY;
+				 //console.log(a,b);
+				var dis=parseInt(Math.sqrt(Math.pow(a,2)+Math.pow(b,2)));
+				var scale=1-dis/200;
+				if(scale<0.5){
+					scale=0.5; 
+				}
+				aImg[i].width=scale*arr[i];
+      		}
+  		}
+}
+</script>
+</head>
+<body>
+<div id="wrapper">
+<a href="#"><img src="images/1.png" ></a>
+<a href="#"><img src="images/2.png" ></a>
+<a href="#"><img src="images/3.png" ></a>
+<a href="#"><img src="images/4.png" ></a>
+<a href="#"><img src="images/5.png" ></a>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,57 @@
+﻿<!Doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<style>
+body,html,span{ margin:0; padding:0;}
+#div1{ width:500px; height:200px; text-align:left; margin:50px auto; border:2px solid #f0f0f0; line-height:30px;}
+
+</style>
+
+</head>
+<body>
+	<div id="div1">
+		
+	</div>
+	<script>
+		var curTime=nowTime();
+		var curTime1 = new Date(); 
+		var oDiv1 = document.getElementById("div1");
+			oDiv1.innerHTML = "系统当前时间："+curTime+"<br/>"+"当前页面停留时间:"+"0时"+"0分"+"0秒";	
+			
+	var timer = setInterval(function(){
+		var sj=nowTime();
+		var oDiv1 = document.getElementById("div1");
+		var sj1 = new Date();
+		var ss1 = tingLiu(curTime1,sj1);
+		oDiv1.innerHTML = "系统当前时间："+sj+"<br/>"+"当前页面停留时间:"+ss1;
+	},1000);
+	
+	function nowTime(){
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = (date.getMonth()+1)<10 ? "0"+(date.getMonth()+1):"" +(date.getMonth()+1);
+		var day = date.getDate()<10 ? "0"+date.getDate():"" + date.getDate();
+		var hour = date.getHours()<10 ? "0" + date.getHours():""+ date.getHours();
+		var minute = date.getMinutes()<10 ? "0"+date.getMinutes():"" + date.getMinutes();
+		var second = date.getSeconds()<10 ? "0"+date.getSeconds():"" + date.getSeconds();
+		var ss = year +"-"+ month +"-"+ day +" "+ hour +":"+ minute +":"+ second;	
+		return ss;
+		
+	}
+	function tingLiu(curTime1,sj1){
+		var sJianCha = sj1 - curTime1;
+		var shi11 = parseInt(sJianCha/(60*60*1000));
+		var fen1 =parseInt((sJianCha-shi11*60*60*1000)/(60*1000));
+		var miao1 =parseInt((sJianCha - shi11*(60*60*1000)-fen1*(60*1000))/1000);
+		return shi11+"时"+fen1+"分"+miao1+"秒";
+	}
+	
+	
+	
+</script>
+</body>
+
+
+</html>

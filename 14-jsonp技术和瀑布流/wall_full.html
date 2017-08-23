@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,div,ul,li,img{padding:0;margin:0}
+			ul,li{list-style:none;}
+			li{padding-left:10px;padding-top:10px;}
+			ul{float:left;}
+			img{display: block;}
+		</style>
+		<script>
+		function Ajax(url,fnSucc,fnFail){
+				var xhr = null;
+				if(window.XMLHttpRequest){
+					xhr = new XMLHttpRequest();
+				}else{
+					xhr = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xhr.open("get",url,true);
+				xhr.send();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState==4){
+						if(xhr.status==200){
+							fnSucc(xhr.responseText);
+						}else{
+							if(fnFail)fnFail();
+						}
+					}
+				}
+			}
+		function lastHeight(obj){
+			//return obj.parentNode.offsetHeight;
+			var s=obj.offsetHeight;
+			if(obj){
+				s+=obj.offsetTop;
+			}
+			return s;
+		}	
+		//var tag = true;
+		var aUl = document.getElementsByTagName("ul");
+		window.onscroll = function(){
+			var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+			var clientHeight = document.documentElement.clientHeight;
+			for(var i = 0; i < aUl.length; i++){
+				var aLi=aUl[i].getElementsByTagName("li");
+				var lastLi=aLi[aLi.length-1];
+				var lastH=lastHeight(lastLi);
+				if(lastH<scrollTop+clientHeight){
+					Ajax("json1.txt",function(str){
+						var arr = eval('('+str+')');
+						for(var j = 0; j < arr.list.length; j++){
+							console.table(arr);
+							var list = arr.list[j];
+							console.log(arr.list);
+							for(var k = 0; k < list.src.length; k++){
+								var oLi = document.createElement("li");
+								//console.table(list)
+								oLi.innerHTML = '<img src="'+list.src[k]+'">';
+								aUl[k].appendChild(oLi);
+							}
+						}
+						//console.log(arr);
+					})
+				}
+	
+			}
+	
+		}
+		</script>
+	</head>
+	<body>
+		<div>
+			<ul id="ul1">
+				<li><a href="#"><img src="img/1.jpg"><span></span></a></li>
+				<li><a href="#"><img src="img/2.jpg"><span></span></a></li>
+				<li><a href="#"><img src="img/2.jpg"><span></span></a></li>
+				<li><a href="#"><img src="img/3.jpg"><span></span></a></li>
+			</ul>
+			<ul id="ul1">
+				<li><a href="#"><img src="img/1.jpg"><span></span></a></li>
+				<li><a href="#"><img src="img/2.jpg"><span></span></a></li>
+				<li><a href="#"><img src="img/4.jpg"><span></span></a></li>
+				<li><a href="#"><img src="img/4.jpg"><span></span></a></li>
+			</ul>
+			<ul id="ul1">
+				<li><a href="#"><img src="img/3.jpg"><span></span></a></li>
+				<li><a href="#"><img src="img/3.jpg"><span></span></a></li>
+				<li><a href="#"><img src="img/2.jpg"><span></span></a></li>
+				<li><a href="#"><img src="img/1.jpg"><span></span></a></li>
+			</ul>
+		</div>
+	</body>
+</html>

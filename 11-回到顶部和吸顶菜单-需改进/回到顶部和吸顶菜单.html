@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<style>
+body{height:2000px;}
+#nav{height:60px;width:100%;background:rgb(0,51,255);display:none;position:fixed;top:0;left:0;}
+button{position:fixed;right:20px;bottom:20px;display:none;}
+textarea{height:50px;width:200px;}
+</style>
+
+<body>
+
+<textarea></textarea>
+<div id="nav"></div>
+<button>回到顶部</button>
+</body>
+
+
+<script>
+
+window.onload=function(){
+	
+	
+	document.getElementsByTagName("button")[0].onclick=function(){
+		
+		var timer=setInterval(function(){
+			var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+			
+			var iSpeed=scrollTop/5;
+			
+			if(scrollTop==0){
+				
+				clearInterval(timer)
+			}
+			
+			document.body.scrollTop-=iSpeed;
+			
+			document.documentElement.scrollTop-=iSpeed;
+			
+			
+		},10)
+		document.documentElement.scrollTop=document.body.scrollTop=0;	
+		
+	}	
+	
+}
+
+
+window.onscroll=function(){
+	
+	
+	var div=document.getElementById("nav");
+	var clientHeight=document.documentElement.clientHeight;
+	var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+	var cHeight=document.documentElement.clientHeight;
+	console.log(scrollTop);
+	document.title=scrollTop;
+	if(scrollTop>=cHeight){
+	
+		div.style.display="block";
+		document.getElementsByTagName("button")[0].style.display="block";
+				
+	}else{
+		
+		div.style.display="none";	
+		document.getElementsByTagName("button")[0].style.display="none";
+		
+	}	
+	
+	
+}
+
+
+//navigator.userAgent    例:window.navigator.userAgent;
+
+//console.log(window.navigator.userAgent);
+
+//window.location="http://www.baidu.com";//页面跳转
+//window.location="http://www.baidu.com";
+//console.log(window.location.href);
+//window.location.reload();
+//window.location.reload();//参数：true刷新页面，不适用缓存   false刷新页面，如果文档为改变使用缓存；
+
+//打开窗口：window.open("地址"，'target')target:_self、_blank(默认)、_parent、_top
+//window.open("http://www.baidu.com","_self");
+
+//选择框  confirm("你吃饭了么");返回boolean；
+//输入框：prompt()，返回字符串或null    prompt("你的名字","xy");
+
+//confirm("aaaa");
+
+//var str=prompt("what's your name","");
+
+//console.log(str);
+
+
+
+
+//scrollTop可视区域距离页面顶部 的距离   例：scrollTop=document.documentElement.scrollTop||document.body.scrollTop
+//scrollLeft可视区域距离页面左边的距离
+
+//scrollTop和scrollLeft是可读可写属性；
+//clientWidth可视区域的宽度document.documentElement.clientWidth; clientWidth是只读属性;
+
+
+//offsetWidth:对象的宽度  例：obj.offsetWidth;   宽度=内容+padding+border
+//offsetHeight:对象的高度 例：obj.offsetHeight;
+//offsetTop:对象的上边距； 例:obj.offsetTop;
+//offsetLeft:对象的左边距；例:obj.offsetLeft; 
+//offsetParent对象定位上的父级；
+
+
+
+//BOM中常用事件： onload当文档加载完毕执行
+//				onscroll:当页面滚动时执行；
+//				onresize:当页面重订大小时执行；
+
+
+
+
+
+
+//
+//var oDiv=document.getElementById("div1");
+//alert(oDiv.offsetWidth);
+//alert(oDiv.offsetHeight);
+//var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+//console.log(scrollTop);
+//var width=document.documentElement.clientWidth;
+//var height=document.documentElement.clientHeight;
+//console.log(width);
+//console.log(height);
+
+
+</script>
+</html>

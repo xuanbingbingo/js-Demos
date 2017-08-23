@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" content="IE=Edge">
+<title>0629-QQ邮箱注册页面</title>
+<style>
+div,h1,ul,li,form,h6{margin:0;padding:0;}
+ul,li{list-style:none;}
+a{text-decoration:none;}
+li{margin:20px;}
+.bt{height:35px;width:381px;border-bottom:1px dashed rgb(153,153,153)}
+.account{height:25px;width:200px;margin-right:5px;}
+.last_name{height:25px;width:80px;cursor:pointer;}
+.last_name_ul{cursor:pointer;position:absolute;top:105px;left:309px;width:80px;border:1px solid rgb(153,153,153);background:#f3f9fc;}
+.last_name_ul li{margin:0;font-size:9px;}
+span{white-space:pre-wrap;margin-right:10px;}
+.name,.password,.confirm{height:25px;width:285px;}
+input{border:none;border:1px solid rgb(102,102,102);border-radius:2px;outline:none;background:#f3f9fc;}
+label{font-size:9px;margin-left:5px;}
+.pass_label{height:55px;width:130px;border:1px solid rgb(204,204,204);position:absolute;top:160px;left:390px;display:none;}
+.pass_label span{width:130px;display:block;float:left;margin-top:2px;}
+#sub{height:35px;line-height:35px;width:288px;background:rgb(0,153,0);color:#FFF;font-size:18px;text-align:center;margin-left:95px;outline:none;border:none;cursor:pointer;}
+strong{height:25px;line-height:25px;text-align:center;width:70px;border:1px solid rgb(102,102,102);display:inline-block;margin-right:5px;margin-bottom:-7px;}
+.for_check{margin-left:32px;}
+.write{height:25px;width:70px;margin-bottom:-5px;text-align:center;font-size:14px;font-weight:bold;}
+.phone_number{height:25px;width:288px}
+h6{margin-left:90px;margin-top:-15px;font-weight:500;}
+</style>
+<script>
+window.onload=function(){
+	var aInput=document.getElementsByTagName("input");
+	var lastName=document.getElementsByClassName("last_name")[0];
+	var lastNameUl=document.getElementsByClassName("last_name_ul")[0];
+	var sub1=document.getElementById("sub");
+	var check=document.getElementsByClassName("check")[0];
+	var strong=document.getElementsByTagName("strong")[0];
+	var typeIn=document.getElementsByClassName("write")[0];
+	var for_check=document.getElementsByClassName("for_check")[0];
+	//var phone=document.getElementsByClassName("phone_number")[0];
+	lastNameUl.style.display="none";
+	lastName.onclick=function(){
+		if(lastNameUl.style.display=="none"){
+			lastNameUl.style.display="block";
+			console.log(evt.target)	
+		}else{
+			lastNameUl.style.display="none";
+		}	
+	}
+	lastNameUl.onmouseover=function(e){
+		var evt=e||event;
+		var target=evt.target||evt.srcElement;
+		
+		if(target.nodeName.toLowerCase()=="li"){
+			console.log(target);
+			target.style.background="red";
+		}	
+	}
+	lastNameUl.onmouseout=function(e){
+		var evt=e||event;
+		var target=evt.target||evt.srcElement;
+		
+		if(target.nodeName.toLowerCase()=="li"){
+			//console.log(target);
+			target.style.background="";
+		}	
+	}
+	lastNameUl.onclick=function(e){
+		var evt=e||event;
+		var target=evt.target||evt.srcElement;
+		
+		if(target.nodeName.toLowerCase()=="li"){
+			lastName.value=target.innerText;
+			lastNameUl.style.display="none";
+		}	
+	}
+	sub1.onclick=function(){
+		return false;	
+	}
+	check.onclick=function(){		//四位随机的数字和大写字母组合的验证码
+		var arr=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9"]
+
+		var str="";
+		for(var i=0;i<4;i++)
+		{
+			var iNum=parseInt(Math.random()*100);
+			while(iNum>35){
+				iNum=parseInt(Math.random()*100)
+			}
+			str+=arr[iNum];
+		}
+		strong.innerText=str.toUpperCase();	
+		typeIn.value="";
+		typeIn.onblur=function(){
+			console.log(this.value,strong.innerText)
+			if(this.value==strong.innerText){
+				for_check.innerText="验证通过!";
+				
+			}else{
+				for_check.style.color="red";
+				for_check.innerText="验证码输入有误,请重试!";	
+			}	
+		}	
+	}
+	for(var i=0;i<aInput.length;i++){
+		aInput[i].index=i;
+		aInput[i].onfocus=function(){
+			aInput[this.index].style.border="1px solid red";
+			aInput[this.index].style.background="#FFF";
+			aInput[this.index].parentNode.lastElementChild.style.color="black";
+			switch(this.index){
+				case 0:
+					this.parentNode.lastElementChild.innerHTML="请创建邮箱名，由3-18个英文、数字、点、减号、下划线组成";
+					break;
+				case 2:
+					this.parentNode.lastElementChild.innerHTML="请输入昵称";
+					break;
+				case 3:
+					this.parentNode.lastElementChild.style.display="block";
+					this.parentNode.lastElementChild.innerHTML="<span>@长度为6-11个字符</span><span>@不能是9位以下纯数字</span><span>@不能包含空格</span>";
+					break;
+				case 4:
+					this.parentNode.lastElementChild.innerHTML="请再次确认密码";
+					break;
+				case 8:
+					this.parentNode.lastElementChild.innerHTML="请输入手机号码";
+					break;
+				default:
+					break;					
+			}
+		}	
+	}
+	console.log(aInput.length);
+	for(var i=0;i<aInput.length;i++){
+		aInput[i].index=i;
+		aInput[i].onblur=function(){
+			var pattern=/^[a-z][\w|\.|-]{2,12}$/;
+			var pattern1=/^[a-z]/;					//匹配邮箱的正则表达式
+			var pattern2=/\s/g;						//匹配用户名中是否有空格
+			var pattern3=/.{6,11}/;					//长度为6-11个字符
+			var pattern4=/\d{6,9}/;					//不能使9位以下纯数字
+			var pattern5=/^[1][3-9]\d{9}$/			//11位手机号码；
+			aInput[this.index].parentNode.lastElementChild.style.color="red";
+			aInput[this.index].style.background="#f3f9fc";
+			switch(this.index){
+				case 0:
+					if(!this.value.match(pattern)){	
+						if(this.value.length==0){
+							this.parentNode.lastElementChild.innerHTML="请输入邮箱！";
+						}else if(!this.value.match(pattern1)){
+							this.parentNode.lastElementChild.innerHTML="必须以字母开头！"
+						}else if(this.value.length<3||aInput[this.index].value.length>18){	
+							this.parentNode.lastElementChild.innerHTML="长度为3-18个字符!";	
+						//aInput[this.index].parentNode.lastElementChild.innerHTML="您输入的字符不能为空！";
+						}else{
+							this.parentNode.lastElementChild.innerHTML="";
+						}		
+					}else{
+						this.style.border="1px solid rgb(102,102,102)";
+						this.parentNode.lastElementChild.innerHTML="";
+					}
+					break;
+				case 1:
+					this.style.border="1px solid black";
+					lastNameUl.style.display="none";
+					break;
+				case 2:
+					if(this.value.length==0){
+						this.parentNode.lastElementChild.innerHTML="用户名不能为空！";
+					}else if(this.value.match(pattern2)){
+						this.parentNode.lastElementChild.innerHTML="用户名不能包含空格！";	
+					}else{
+						this.style.border="1px solid rgb(102,102,102)";
+						this.parentNode.lastElementChild.innerHTML="";
+					}
+					break;
+				case 3:
+					aInput[this.index].parentNode.lastElementChild.style.color="black";
+					if(!this.value.match(pattern3)){
+						this.parentNode.lastElementChild.getElementsByTagName("span")[0].style.color="red";	
+					}else if(this.value.match(pattern4)==this.value){
+						this.parentNode.lastElementChild.getElementsByTagName("span")[1].style.color="red";	
+					}else if(this.value.match(pattern2)){
+						this.parentNode.lastElementChild.getElementsByTagName("span")[2].style.color="red";	
+					}else{
+						this.style.border="1px solid rgb(102,102,102)";
+						this.parentNode.lastElementChild.style.display="none";
+					}
+					break;
+				case 4:
+					console.log(this.value,aInput[3].value);
+					if(this.value!==aInput[3].value){
+						this.parentNode.lastElementChild.innerHTML="您输入的两次密码不一致！";	
+					}else{
+						this.style.border="1px solid rgb(102,102,102)";
+						this.parentNode.lastElementChild.innerHTML="";
+					}
+					break;
+				case 8:
+					if(!this.value.match(pattern5)){
+						this.parentNode.lastElementChild.innerHTML="请输入11位有效地手机号码！";	
+					}else{
+						this.style.border="1px solid rgb(102,102,102)";
+						this.parentNode.lastElementChild.innerHTML="";
+					}
+					break;
+				default:
+					break;
+				
+			}	
+		}			
+	}
+}
+</script>
+</head>
+<body>
+<form class="register">
+	<h2 class="bt">注册账号</h2>
+    <ul class="last_name_ul">
+    	<li>@qq.com</li>
+        <li>@163.com</li>
+       	<li>@126.com</li>
+    </ul>
+    <ul>
+    	<li><span>邮箱账号</span><input type="text" class="account"><input type="text" class="last_name" value="@qq.com"><label>
+</label></li>
+        <li><span>       昵称</span><input type="text" class="name"><label>
+</label></li>
+        <li><span>       密码</span><input type="password" class="password"><label class="pass_label">
+</label></li>
+        <li><span>确认密码</span><input type="password" class="confirm"><label>
+</label></li>
+		<li><span>       性别</span><label><input type="radio" name="sex">男</label><label><input type="radio" name="sex">女</li></label>
+        <li><span>    验证码</span><strong></strong><a href="javascript:;" class="check">点击刷新<a><input type="text" class="write"><label>输入验证码</label><label class="for_check"></label></li>
+        <li><span>手机号码</span><input type="text" class="phone_number"><label></label></li>
+        <li><h6>忘记密码时，可以通过该手机号码快速找回密码</h6></li>
+   	</ul>
+    <button id="sub">提交注册</button>
+</form>
+</body>
+</html>

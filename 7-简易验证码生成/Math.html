@@ -1,0 +1,70 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Math基础</title>
+</head>
+<style>
+
+</style>
+
+
+
+
+<body>
+<div>
+<button onClick="bclick()">获取验证码</button><input type="text">
+<div>
+<script>
+function bclick(){	//四位随机的数字验证码
+	
+	var sum=parseInt(Math.random()*10000) ;
+	while(sum<=1000)
+	{
+		sum=parseInt(Math.random()*10000)
+	}
+	var val=document.getElementsByTagName("input")[0];
+	val.value=sum;
+	
+}
+
+function bclick(){	//四位随机的数字和大写字母组合的验证码
+	var arr=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9"]
+	
+	var str="";
+	for(var i=0;i<4;i++)
+	{
+		var iNum=parseInt(Math.random()*100);
+		while(iNum>35){
+			
+			iNum=parseInt(Math.random()*100)
+			
+		}
+		str+=arr[iNum];
+	}
+	var val=document.getElementsByTagName("input")[0];
+	val.value=str.toUpperCase();		
+}
+
+
+/*
+Math.PI;圆周率
+Math.abs();取绝对值
+Math.sin(x);
+Math.cos(x);
+Math.tan(x);
+Math.sqrt(x);返回数的平方根
+Math.pow(x,y);返回x的y次方
+Math.floor(x);对数进行下舍入
+Math.ceil(x);对数进行上舍入
+Math.max(x,y,..);
+Math.min(x,y,..);
+Math.round(x);四舍五入
+Math.random();返回0-1之间的数
+*/
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>day04</title>
+<style>
+body{font:12px "宋体"}
+p{font-weight:bold;font-family:"微软雅黑"}
+</style>
+<script>
+document.write("<p>以下是用for循环打印菱形：</p><br>");
+function dayin5(){
+	for(i=1;i<=5;i++){	
+		for(m=1;m<=5-i;m++){document.write("&nbsp;");}
+		
+		for(j=1;j<=2*i-1;j++){document.writeln("*");}
+		
+		document.write("<br>");
+	}
+	
+}
+	dayin5();
+function dayin6(){
+	for(i=4;i>=1;i--){
+
+		for(m=1;m<=4-i+1;m++){document.write("&nbsp;");}
+		for(j=1;j<=2*i-1;j++){document.writeln("*");}
+		
+		document.write("<br>");
+	}
+
+}
+	dayin6();
+document.write("<p>以下是求1+2!+3!+...+20!的值：</p><br>");	
+function jieCheng(){
+		var sum=0;
+		var times=1;
+		for(i=1;i<=20;i++){
+			times=times*i;
+			sum+=times;	
+		}	
+		document.write(sum);	
+		
+	}
+	jieCheng();
+document.write("<p>以下是打印出1-100里所有的奇数：</p><br>");
+function jiShu(){
+	for(i=1;i<=100;i+=2){
+	document.writeln(i);
+	}
+	
+}
+	jiShu();
+document.write("<p>以下是打印出1-100里所有的偶数：</p><br>");
+function ouShu(){
+	for(i=1;i<=100;i++){
+		if(i%2==0){
+		document.writeln(i);
+		}
+	}
+	
+}
+	ouShu();
+document.write("<p>以下是输出20-80之间能被3整除的整数，每五个一行：</p><br>");
+function zhengShu(){
+	var j=0;
+	for(i=20;i<=80;i++){
+		
+		if(i%3==0){		
+			document.writeln(i);
+			j++;
+			if(j%5==0){
+				document.write("<br>");	
+			}
+		}
+		
+	}
+
+}
+	zhengShu();
+document.write("<p>以下是打印出1000-2000年中所有的闰年，并以每行四个数的形式输出：</p><br>");
+function runNian(){
+	var j=0;
+	for(year=1000;year<=2000;year++){
+		if((year%4==0)&&(year%100!=0)||(year%400==0))
+		{			
+			document.writeln(year);	
+			j++;
+			if(j%4==0){
+				document.write("<br>");	
+			}
+				
+		}		
+	}
+		
+}
+	runNian();
+
+
+document.write("<p>以下是九九乘法表：</p><br>");
+function chengFaBiao(){
+		for(i=1;i<=9;i++){
+			for(j=1;j<=i;j++){
+				
+			document.writeln(i+"*"+j+"="+i*j+"\n"+"&nbsp;");	
+				
+			}
+		document.write("<br>");
+		}
+	
+}
+	chengFaBiao();
+
+	
+</script>
+</head>
+
+<body>
+</body>
+</html>

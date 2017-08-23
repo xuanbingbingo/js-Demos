@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>豆瓣评论</title>
+<style>
+textarea,div,h1,h2,h3{margin:0;padding:0}
+a{text-decoration:none;}
+
+#top{min-height:80px;height:auto!important;height:80px;border:1px solid rgb(255,0,0);background:rgb(153,255,51);padding:10px;}
+#top:after{content:"";clear:both;height:0;display:block;overflow:hidden;visibility:hidden;}
+textarea{height:60px;width:500px;}
+button{display:block;margin-top:10px;}
+.content{height:60px;width:500px;border:2px solid rgb(255,0,0);background:rgb(204,255,153);margin-top:20px;overflow:auto;}
+
+.img{height:60px;width:60px;background:rgb(255,0,0);float:left;}
+.a{float:right;color:rgb(0,0,0);margin-top:15px;cursor:pointer;margin-right:5px;}
+img{width:312px;height:480px;}
+</style>
+</head>
+
+<body>
+<div id="top">
+<textarea></textarea>
+<button>发布</button>
+
+<div class="content_All">
+<!--	<div class="content">
+    	<div class="img"></div><a href="#"></a>
+-->    </div>
+</div>
+<img src="images/IMG_20140124_154205_0.jpg">
+
+</div>
+<script>
+	
+window.onload=function(){
+	
+						
+			document.getElementsByTagName("button")[0].onclick=function(){
+			var txt=document.getElementsByTagName("textarea")[0].value;
+			var div_content=document.createElement("div");
+			div_content.className="content";
+			
+			var div_content_All=document.getElementsByClassName("content_All")[0];
+			div_content_All.insertBefore(div_content,div_content_All.firstChild);
+			
+			div_content.innerHTML=txt;
+			var img=document.createElement("div");
+			div_content.appendChild(img);
+			img.className="img";
+			
+			var a=document.createElement("a");
+			div_content.appendChild(a);
+			a.className="a";
+			a.innerHTML="删除";	
+			
+			aLi=document.getElementsByTagName("a");
+			console.log(aLi.length);
+			for(var i=0;i<aLi.length;i++){
+				
+				aLi[i].onclick=function(){
+					
+				this.parentNode.style.display="none";
+				return false;
+					
+				}
+										
+			}	
+			
+		}
+						
+}
+
+
+
+
+</script>
+</body>
+</html>

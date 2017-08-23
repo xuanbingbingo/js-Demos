@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>成功跳转</title>
+		<style>
+			h1{	font-size: 14px; font-weight: bold;white-space: pre-wrap;}
+			span{color:aquamarine}
+		</style>
+		<script src="js/common.js"></script>
+		<script>
+			window.onload=function(){
+				var oSpan=document.getElementsByTagName("span")[0];
+				oSpan.innerHTML=getCookie("username");
+			}
+		</script>
+	</head>
+	<body>
+		<h1>欢迎归来   <span></span></h1>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+body,
+p,
+ul,
+li,
+ol,
+dl,
+dd,
+button,
+input,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+
+img {
+	display: block;
+	border: none;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.clearfix:after {
+	display: block;
+	content: "";
+	clear: both;
+}
+
+/*轮播图样式*/
+#banner-box{position:relative;width:1024px;height:373px; margin: 0 auto; overflow: hidden; font-family: "微软雅黑";}
+#banner li{position: absolute;left: 0; top: 0; opacity: 0; filter: alpha(opacity= 0);}
+#banner-box img{width: 1024px; height: 373px;}
+#nav{position: absolute;right: 80px; bottom: 20px; z-index: 2;}
+#nav li{float: left; width:20px; height: 20px; margin: 0 6px; border-radius: 100%; background: #935B5B; color: #fff; text-align: center; line-height: 20px; font-size: 12px; cursor: pointer;}
+#nav li.cur,#nav li:hover{background: #E91E63;}
+#btn div{position: absolute; width:40px; height: 60px; background: #5C2C2C; top:155px; opacity: .3; filter:alpha(opacity=30); text-align: center; font-size: 40px; color: white; cursor: pointer; display: none;z-index: 2;}
+.prev{left:30px;}
+.next{right:30px;}
+#banner-box:hover div{display: block;}
+#banner-box:hover div:hover{opacity: 1; filter: alpha(opacity=100);}

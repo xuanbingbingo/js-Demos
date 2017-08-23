@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:500px;overflow:hidden;}
+body,ul{padding:0;margin:0;}
+ul{list-style:none;}
+ul li{float:left;}
+img{width:200px; height:200px;}
+
+</style>
+<script type="text/javascript">
+
+window.onload = function(){
+
+var oLeft = document.getElementById("left");
+var oRight = document.getElementById("right");
+var oDiv = document.getElementById("div1");
+var oUl = document.getElementById("ul1");
+
+oUl.innerHTML += oUl.innerHTML;
+
+var aLi = oUl.getElementsByTagName("li");
+
+var iSpeed = 10;
+
+//如何获取ul的宽度  ul的宽度 = li的宽度 * li的个数
+
+oUl.style.width = aLi.length * aLi[0].offsetWidth + "px";
+
+
+//考虑通过scrollLeft解决滚动问题，由于是连续滚动,考虑使用定时器(setInterval)
+
+function move(){
+
+
+	if( oDiv.scrollLeft >= oUl.offsetWidth/2 ){
+	
+		oDiv.scrollLeft = 0;
+	
+	}else if(oDiv.scrollLeft <= 0){
+	
+		oDiv.scrollLeft = oUl.offsetWidth/2;
+	
+	}
+
+	oDiv.scrollLeft += iSpeed;
+
+}
+var timer = setInterval(move,30);
+
+oLeft.onclick = function(){
+
+	iSpeed = Math.abs(iSpeed);
+
+};
+
+oRight.onclick = function(){
+
+	iSpeed = -Math.abs(iSpeed);
+
+};
+
+
+oDiv.onmouseover = function(){
+
+	clearInterval(timer);
+
+};
+
+oDiv.onmouseout = function(){
+
+	timer=setInterval(move,30);
+
+}
+
+}
+console.log(parseFloat(" "));
+console.log(Number(" "));
+console.log(Number(null));
+console.log(Number(undefined))
+
+</script>
+
+</head>
+
+<body>
+
+<a href="#" id="left">向左</a>
+<a href="#" id="right">向右</a>
+
+<div id="div1">
+<ul id="ul1"><li><img src="img/1.jpeg" /></li><li><img src="img/2.jpg" /></li><li><img src="img/3.jpg" /></li><li><img src="img/4.jpg" /></li></ul>
+</div>
+</body>
+</html>

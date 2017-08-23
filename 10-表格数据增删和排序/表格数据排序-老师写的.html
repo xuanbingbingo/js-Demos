@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body{padding:0;margin:0; font-size:14px; font-family:"微软雅黑"}
+ul,li{padding:0;margin:0; list-style:none;}
+table{width:800px; margin:50px auto; border-collapse:collapse;}
+th,td{border:1px solid #cecece; text-align:center; line-height:32px; cursor:pointer}
+th{background-color:#f2f2f2}
+#insertBox{width:800px; margin:0 auto;}
+#insertBox li{margin:20px 0;}
+#insertBox li input{padding:6px 12px; margin-left:10px; width:160px;}
+#insertBox li:first-child input{background-color:#eee; cursor:not-allowed; border:1px solid #aaa;}
+#insertBox #btn{ margin-left:38px; width:80px; font-family:"微软雅黑"; cursor:pointer;}
+
+</style>
+</head>
+
+<body>
+<table id="tab">
+  <tr>
+    <th>学号</th>
+    <th>姓名</th>
+    <th>分数</th>
+	<th>操作</th>
+  </tr>
+</table>
+<div id="insertBox">
+	<ul>
+		<li>学号<input type ="text" value="20160001" readonly ></li>
+		<li>姓名<input type ="text" ></li>
+		<li>分数<input type ="text" ></li>
+		<li><input type="button" id="btn" value="添加"></li>
+	</ul>
+	
+</div>
+<script type="text/javascript">
+
+	var aInput = document.getElementsByTagName("input");
+	
+	var oBtn = document.getElementById("btn");
+	
+	var arr = [];
+	
+	var oTh = document.getElementsByTagName("th");
+	
+	var oTable = document.getElementsByTagName("table")[0];
+	
+	oBtn.onclick = function(){
+	
+		for(var i = 0; i < aInput.length-1; i++){
+		
+			arr.push(aInput[i].value);
+		
+		}
+	
+		arr.push("<a href='javascript:;'>删除</a>");
+		
+		
+		var oTr = document.createElement("tr");
+		
+		for(var j = 0; j < oTh.length; j++){
+		
+			var oTd = document.createElement("td");
+			
+			oTd.innerHTML = arr[j];
+			
+			oTr.appendChild(oTd);
+		
+		}
+		
+		oTable.appendChild(oTr);
+
+		arr = [];
+		
+		
+		var aLink = document.getElementsByTagName("a");
+		
+		for(var k = 0; k < aLink.length; k++){
+		
+			aLink[k].onclick = function(){
+			
+				this.parentNode.parentNode.style.display = "none";
+			
+			}
+			
+		}
+		
+		var scoreArr = [];
+		
+		var aTr = document.getElementsByTagName("tr");
+		
+		oTh[2].onclick = function(){
+		
+			for(var m = 1; m < aTr.length; m++){
+			
+				scoreArr.push(aTr[m]);
+			
+			}
+			
+			
+			scoreArr.sort(function(a,b){
+			
+				return a.children[2].innerHTML - b.children[2].innerHTML;
+			
+			});
+			
+			
+			for(var n = 0; n < scoreArr.length; n++){
+			
+				oTable.appendChild(scoreArr[n]);
+			
+			}
+		
+		}
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+/*
+	var oBtn = document.getElementById("btn");
+	
+	var aInput = document.getElementsByTagName("input");
+	
+	var oTable = document.getElementById("tab");
+	
+	var aTh = oTable.getElementsByTagName("th");
+	
+	var arr = [];
+	
+	oBtn.onclick = function(){
+	
+		for(var i = 0; i < aInput.length-1; i++){
+		
+			if(!aInput[i].value){
+			
+				alert("不能为空");
+				
+				return;
+			}
+		
+			arr.push(aInput[i].value);
+		
+		}
+		
+		arr.push("<a href='javascript:;'>删除</a>");
+		
+		var oTr = document.createElement("tr");
+		
+		for(var j = 0; j < aTh.length; j++){
+		
+			var oTd = document.createElement("td");
+			
+			oTd.innerHTML = arr[j];
+			
+			oTr.appendChild(oTd);
+		
+		}
+
+		oTable.appendChild(oTr);
+		
+		aInput[0].value++;
+		
+		arr = [];
+		
+		var aLink = document.getElementsByTagName("a");
+		
+		for(var k = 0; k < aLink.length; k++){
+		
+			aLink[k].onclick = function(){
+		
+			this.parentNode.parentNode.style.display = "none";
+		
+			}
+		
+		}
+		
+		var arr1 = [];
+		aTh[2].onclick = function(){
+		
+			var aTr = oTable.getElementsByTagName("tr");
+			
+			for(var i = 1; i < aTr.length; i++){
+		
+				arr1.push(aTr[i]);
+		
+			}
+			
+			arr1.sort(function(a,b){
+			
+				return a.children[2].innerHTML - b.children[2].innerHTML;
+			
+			})
+			
+			for(var j = 0; j < arr1.length; j++){
+			
+				oTable.appendChild(arr1[j]);
+			
+			}
+			
+			
+		
+		}
+		
+	}
+	
+	
+	
+	/*
+	
+	var oTable = document.getElementById("tab");
+	var aTr = oTable.getElementsByTagName("tr");
+	var oBtn = document.getElementById("btn");
+	
+	var arr = [];
+	
+	oBtn.onclick = function(){
+	
+		for(var i = 1; i < aTr.length; i++){
+		
+			arr.push(aTr[i]);
+		
+		}
+		
+		arr.sort(function(a,b){
+		
+			return a.children[2].innerHTML - b.children[2].innerHTML
+		
+		});
+		
+		
+		console.log(arr[0]);
+		
+	
+	}
+	*/
+
+
+</script>
+</body>
+</html>

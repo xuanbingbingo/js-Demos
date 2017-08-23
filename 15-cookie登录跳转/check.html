@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"}>
+		<title>登录页面</title>
+		<script src="js/common.js"></script>
+	</head>
+	<body>
+		用户名<input type="text">
+		密码<input type="password">
+		<button>登录</button>
+		
+		<script>
+			var name1 = document.getElementsByTagName("input")[0];
+			var psw = document.getElementsByTagName("input")[1];
+			var butt=document.getElementsByTagName("button")[0];
+			butt.onclick=function(){
+				document.cookie=setCookie("username",name1.value,1)
+				document.cookie=setCookie("password",psw.value);
+				if(getCookie("username")!=""&&getCookie("password")!=""){
+					window.open("success.html","_self");
+				}else{
+					alert("请输入用户名和密码！");
+				}	
+			}
+		</script>
+	</body>
+</html>

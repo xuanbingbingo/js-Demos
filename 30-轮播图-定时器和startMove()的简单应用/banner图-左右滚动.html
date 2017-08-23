@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/common.js"></script>
+		<style>
+			ul,li,div{margin:0;padding:0}
+			#banner-box{
+				width:1000px;
+				height:365px;
+				margin:0 auto;
+				overflow: hidden;
+				position: relative;
+				}
+			#banner-box #ul{
+				position:absolute;
+				width:900px;
+				height:365px;
+				overflow: hidden;
+			}
+			#ul1{
+				width:6000px;
+				position:absolute;
+				top:0;
+				left:0;
+				}
+			#banner-box #ul1 li{
+				float:left;
+				}	
+			#banner-box #ul2{
+				float:right;
+				width:100px;
+				background:yellow;
+			}
+			#banner-box #ul2 li{
+				height:122px;
+				line-height:122px;
+				text-align:center;
+				cursor:pointer;
+			}
+			#banner-box img{
+				width:900px;
+				height:365px;
+			}
+		</style>
+		<script>
+			window.onload = function(){
+				var oBannerBox = document.getElementById("banner-box");
+				var oUl =document.getElementById("ul1");
+				var oBtn =document.getElementById("ul2");
+				var aLin = oBtn.getElementsByTagName("li");
+				var oNext = document.getElementById("next");
+				var oPre = document.getElementById("pre");
+				oUl.innerHTML += oUl.innerHTML;
+				var aLi = oUl.getElementsByTagName("li");
+				var iWidth = parseInt(getStyle(aLi[0],"width"));
+				//console.log(iHeight);
+				var i=0;
+				var timer = setInterval(move,3000);
+				var bTag = true;
+				function move(){
+					bTag = false;
+					clearInterval(timer);
+					i++;
+					for(var k = 0;k < aLin.length;k ++){
+						aLin[k].style.background = "yellow";
+					}
+					if(i >= aLi.length/2){
+						aLin[0].style.background = "red";
+					}else{
+						aLin[i].style.background = "red";
+					}
+					startMove(oUl,{"left":-iWidth*i},clear);
+				}
+				function clear(){
+					if(i >= aLi.length/2){
+						i = 0;
+						oUl.style.left = 0;
+					}
+					timer = setInterval(move,3000);
+					bTag = true;
+				}
+				for(var j = 0; j< aLin.length; j++){
+					
+					aLin[j].index = j;
+					aLin[j].onclick = function(){
+						//console.log("a");
+						i = this.index - 1;
+						move();	
+					}
+				}
+				oNext.onclick = function(){
+					if(bTag){
+						move();
+					}
+				}
+				oPre.onclick = function(){
+					if(bTag){
+						if(i == 0){
+							oUl.style.left = -(aLin.length/2)*iWidth + "px";
+							i = aLi.length/2 - 2;
+							
+						}else{
+							i = i - 2;
+						}
+						move();	
+					}
+				}
+
+			}
+		</script>
+	</head>
+	<body>
+		<div id="banner-box">
+			<div id="ul">
+				<ul id="ul1">
+					<li><img src="img/1.gif"></li>
+					<li><img src="img/2.gif"></li>
+					<li><img src="img/3.gif"></li>
+				</ul>
+			</div>
+			<ul id="ul2">
+				<li style="background:red">1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+		</div>
+		<div><a id="pre" href="javascript:;">上一页</a><a id="next" href="javascript:;">下一页</a></div>
+	</body>
+</html>
